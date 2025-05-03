@@ -19,6 +19,7 @@ import Privateroute from "../Private/Privateroute";
       path: "/",
       Component: Mainlayout,
       children:[
+        { index: true, Component: Home },
         { path: "home", Component: Home },
         { 
             path: "/category/:id",
