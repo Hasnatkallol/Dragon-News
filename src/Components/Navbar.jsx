@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import { Link, NavLink } from "react-router";
-import User from "../assets/user.png";
+import userIcon from "../assets/user.png";
 import { FirebaseAuthContext } from "../Firebase/FirebaseAuthContext";
 
 const Navbar = () => {
@@ -32,7 +32,7 @@ const Navbar = () => {
           <NavLink className={'font-bold text-accent'} to={"/career"}>Career </NavLink>
         </nav>
         <div className="flex gap-2">
-          <img src={User} alt="" />
+          <img className="w-10 h-10" src={`${user ? user.photoURL : userIcon}`} alt="No" />
           {
             user ?  <button onClick={handleLogout} className="btn btn-primary px-5">Log Out</button> :
                     <Link to={'/auth/login'}>

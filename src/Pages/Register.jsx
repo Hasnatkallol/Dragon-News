@@ -1,11 +1,11 @@
 import React, { use } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { FirebaseAuthContext } from "../Firebase/FirebaseAuthContext";
 
 const Register = () => {
-  const { createUser } = use (FirebaseAuthContext)
-   
+  const { createUser,profileUpdate,setUser } = use (FirebaseAuthContext)
+   const navigate = useNavigate()
 
     const handleRegister = (e) => {
           e.preventDefault();
@@ -17,7 +17,17 @@ const Register = () => {
          createUser(email,password)
          .then((userCredential) => {
            const user = userCredential.user;
-           console.log(user);
+           profileUpdate({
+            displayName: name, photoURL: photo
+           })
+           .then(() => {
+            setUser({...user,displayName: name, photoURL: photo})
+            navigate('/')
+          }).catch((error) => {
+            console.log(error)
+            setUser(user)
+          });
+           
            
          })
          .catch((error) => {
